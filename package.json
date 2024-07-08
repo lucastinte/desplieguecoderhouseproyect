@@ -7,7 +7,8 @@
   "scripts": {
     "devNodemon": "nodemon src/index.js",
     "devNode": "node --watch src/index.js",
-    "test": "mocha test/supertest.test.js"
+    "test": "mocha test/supertest.test.js",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
