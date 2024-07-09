@@ -30,7 +30,10 @@ export const register = async (req, res) => {
       return res.status(400).send("Usuario ya existente en la aplicacion");
     }
 
-    res.status(200).send("Usuario creado correctamente");
+    const message =
+      "Usuario creado correctamente. Ahora puedes iniciar sesión.";
+
+    res.redirect(`/login?message=${encodeURIComponent(message)}`);
   } catch (e) {
     res.status(500).send("Error al registrar usuario");
   }

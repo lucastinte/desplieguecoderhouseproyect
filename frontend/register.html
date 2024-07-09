@@ -9,6 +9,31 @@
 
 <body>
     <h1>Registro de Usuario</h1>
+
+    <!-- Aquí puedes mostrar un mensaje de éxito si hay alguno -->
+    <script>
+        // Función para obtener el mensaje de la URL (si existe)
+        function getQueryVariable(variable) {
+            const query = window.location.search.substring(1);
+            const vars = query.split('&');
+            for (let i = 0; i < vars.length; i++) {
+                const pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) === variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return null;
+        }
+
+        // Función para mostrar el mensaje si existe
+        document.addEventListener('DOMContentLoaded', () => {
+            const message = getQueryVariable('message');
+            if (message) {
+                alert(message);
+            }
+        });
+    </script>
+
     <form action="http://localhost:8080/api/session/register" method="post">
         <label for="first_name">Nombre:</label>
         <input type="text" id="first_name" name="first_name" required><br><br>

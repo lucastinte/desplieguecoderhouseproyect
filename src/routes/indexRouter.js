@@ -14,10 +14,6 @@ const indexRouter = express.Router();
 //Routes
 indexRouter.use("/admin", isAdmin);
 
-indexRouter.get("/", (req, res) => {
-  res.status(200).send("Bienvenido/a!");
-});
-
 indexRouter.use("/public", express.static(path.join(__dirname, "../frontend")));
 indexRouter.use(
   "/api/products",
@@ -37,10 +33,10 @@ indexRouter.get("/admin", (req, res) => {
 indexRouter.get("/cart", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/cart.html"));
 });
-indexRouter.get("/login", (req, res) => {
+indexRouter.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/login.html"));
 });
-indexRouter.post("/register", (req, res) => {
+indexRouter.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/register.html"));
 });
 export default indexRouter;
