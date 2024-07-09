@@ -19,13 +19,13 @@
             const urlParams = new URLSearchParams(window.location.search);
             const cartId = urlParams.get('cartId');
 
-            const sessionResponse = await fetch('http://localhost:8080/api/users/session');
+            const sessionResponse = await fetch('/api/users/session');
             const userSession = await sessionResponse.json();
 
             const userInfoElement = document.getElementById('user-info');
             userInfoElement.textContent = `Usuario: ${userSession.email} | Carrito ID: ${userSession.cart_id._id}`;
 
-            const response = await fetch(`http://localhost:8080/api/cart/${userSession.cart_id._id}`);
+            const response = await fetch(`/api/cart/${userSession.cart_id._id}`);
             const cart = await response.json();
 
             function renderCartProducts(cart) {
@@ -47,7 +47,7 @@
             renderCartProducts(cart);
 
             async function finalizePurchase() {
-                const response = await fetch(`http://localhost:8080/api/cart/purchase/${userSession.cart_id._id}`, {
+                const response = await fetch(`/api/cart/purchase/${userSession.cart_id._id}`, {
                     method: 'GET'
                 });
                 if (response.ok) {

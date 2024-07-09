@@ -16,16 +16,16 @@
 
     <script>
         function goToCart() {
-            window.location.href = 'http://localhost:8080/cart';
+            window.location.href = '/cart';
         }
         document.addEventListener('DOMContentLoaded', async function () {
-            const sessionResponse = await fetch('http://localhost:8080/api/users/session');
+            const sessionResponse = await fetch('/api/users/session');
             const userSession = await sessionResponse.json();
 
             const userInfoElement = document.getElementById('user-info');
             userInfoElement.textContent = `Usuario: ${userSession.email} | Carrito ID: ${userSession.cart_id._id}`;
 
-            const response = await fetch('http://localhost:8080/api/products');
+            const response = await fetch('/api/products');
             const products = await response.json();
 
             function renderProducts(products) {
@@ -56,7 +56,7 @@
                     return;
                 }
 
-                const response = await fetch(`http://localhost:8080/api/cart/${userSession.cart_id._id}/${productId}`, {
+                const response = await fetch(`/api/cart/${userSession.cart_id._id}/${productId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
