@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import passport from "passport";
 import GithubStrategy from "passport-github2";
 import messageModel from "./models/messages.js";
-import indexRouter from "./routes/indexrouter.js";
+import indexRouter from "./routes/indexRouter.js";
 import cookieParser from "cookie-parser";
 import initializePassport from "./config/passport/passport.js";
 import { config } from "dotenv";
