@@ -1,5 +1,5 @@
 import productModel from "../models/product.js";
-
+//controlador de productos
 export const getProducts = async (req, res) => {
   try {
     const { limit, page, filter, ord } = req.query;
