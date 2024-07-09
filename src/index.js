@@ -17,10 +17,6 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express";
 const app = express();
 const PORT = 8080;
-//Server
-const server = app.listen(PORT, () => {
-  console.log(`Server on port ${PORT}`);
-});
 
 // const io = new Server(server);
 
@@ -45,23 +41,8 @@ app.use(
     }),
   })
 );
-const swaggerOptions = {
-  definition: {
-    openapi: "3.1.0",
-    info: {
-      title: "Documentacion de mi aplicacion ",
-      description: "Descripcion de documentacion",
-    },
-  },
-  apis: [`${__dirname}/docs/**/*.yaml`],
-};
-
-const specs = swaggerJSDoc(swaggerOptions);
 
 app.use(cookieParser(varenv.cookies_secret));
-app.engine("handlebars", engine());
-app.set("view engine", "handlebars");
-app.set("views", __dirname + "/views");
 initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
@@ -69,31 +50,31 @@ app.use(passport.session());
 app.use("/", indexRouter);
 
 //ROUTES COOKIES
-app.get("/setCookie", (req, res) => {
-  res
-    .cookie("CookieCookie", "Esto es una cookie", {
-      maxAge: 30000000000,
-      signed: true,
-    })
-    .send("Cookie Creada");
-});
-app.get("/getCookie", (req, res) => {
-  res.send(req.signedCookies);
-});
-app.get("/deleteCookie", (req, res) => {
-  res.clearCookie("CookieCookie").send("Cookie Eliminada");
-});
+// app.get("/setCookie", (req, res) => {
+//   res
+//     .cookie("CookieCookie", "Esto es una cookie", {
+//       maxAge: 30000000000,
+//       signed: true,
+//     })
+//     .send("Cookie Creada");
+// });
+// app.get("/getCookie", (req, res) => {
+//   res.send(req.signedCookies);
+// });
+// app.get("/deleteCookie", (req, res) => {
+//   res.clearCookie("CookieCookie").send("Cookie Eliminada");
+// });
 //ROUTES SESSIONS
 
-app.get("/session", (req, res) => {
-  if (req.session.counter) {
-    req.session.counter++;
-    res.send(`Sos el user num ${req.session.counter} en ingresar a la pagina`);
-  } else {
-    req.session.counter = 1;
-    res.send("sos el primer user en ingresar a la page");
-  }
-});
+// app.get("/session", (req, res) => {
+//   if (req.session.counter) {
+//     req.session.counter++;
+//     res.send(`Sos el user num ${req.session.counter} en ingresar a la pagina`);
+//   } else {
+//     req.session.counter = 1;
+//     res.send("sos el primer user en ingresar a la page");
+//   }
+// });
 
 // io.on("connection", (socket) => {
 //   console.log("Conexion con Socket.io");
@@ -108,4 +89,19 @@ app.get("/session", (req, res) => {
 //     }
 //   });
 // });
+const swaggerOptions = {
+  definition: {
+    openapi: "3.1.0",
+    info: {
+      title: "Documentacion de mi aplicacion ",
+      description: "Descripcion de documentacion",
+    },
+  },
+  apis: [`${__dirname}/docs/**/*.yaml`],
+};
+//Server
+const server = app.listen(PORT, () => {
+  console.log(`Server on port ${PORT}`);
+});
+const specs = swaggerJSDoc(swaggerOptions);
 app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
