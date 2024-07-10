@@ -6,7 +6,7 @@ const sessionRouter = Router();
 sessionRouter.post(
   "/login",
   passport.authenticate("login", {
-    failureRedirect: "/login",
+    failureMessage: true,
   }),
   sessionController.login
 );

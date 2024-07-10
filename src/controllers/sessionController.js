@@ -2,26 +2,20 @@ import { sendEmailChangePassword } from "../utils/nodemailer.js";
 import { userModel } from "../models/user.js";
 import jwt from "jsonwebtoken";
 import { validatePassword, createHash } from "../utils/bcrypt.js";
-export const login = async (req, res) => {
+export const login = (req, res) => {
   try {
-    if (!req.user) {
-      return res.status(401).send("Usuario o contraseña no válidos");
-    }
+    const user = req.user;
     req.session.user = {
-      _id: req.user._id,
-      email: req.user.email,
-      rol: req.user.rol,
-      cart_id: req.user.cart_id,
+      _id: user._id,
+      email: user.email,
+      rol: user.rol,
+      cart_id: user.cart_id,
     };
     console.log("Datos de la sesión:", req.session.user);
 
-    if (req.session.user.rol === "Admin") {
-      return res.redirect("/admin");
-    } else {
-      return res.redirect("/home");
-    }
+    res.status(200).json({ rol: req.session.user.rol });
   } catch (error) {
-    return res.status(500).send("Error en el servidor");
+    res.status(500).json({ message: "Error en el servidor" });
   }
 };
 export const register = async (req, res) => {

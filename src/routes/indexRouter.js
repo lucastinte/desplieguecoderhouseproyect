@@ -30,6 +30,9 @@ indexRouter.get("/home", (req, res) => {
 indexRouter.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/admin.html"));
 });
+indexRouter.get("/admin/products", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/productsAdmin.html"));
+});
 indexRouter.get("/cart", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/cart.html"));
 });

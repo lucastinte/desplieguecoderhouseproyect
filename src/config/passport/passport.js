@@ -51,7 +51,9 @@ const initializePassport = () => {
             await user.save();
             return done(null, user);
           } else {
-            return done(null, false);
+            return done(null, false, {
+              message: "Usuario o contraseña no válidos",
+            });
           }
         } catch (e) {
           return done(e);
