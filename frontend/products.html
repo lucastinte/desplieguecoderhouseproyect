@@ -23,7 +23,7 @@
             const userSession = await sessionResponse.json();
 
             const userInfoElement = document.getElementById('user-info');
-            userInfoElement.textContent = `Usuario: ${userSession.email} | Carrito ID: ${userSession.cart_id._id}`;
+            userInfoElement.textContent = `Usuario: ${userSession.email}`;
 
             const response = await fetch('/api/products');
             const products = await response.json();

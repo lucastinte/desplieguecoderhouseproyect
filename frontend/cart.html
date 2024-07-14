@@ -13,6 +13,7 @@
     <div id="cart-products">
     </div>
     <button id="finalize-purchase">Finalizar Compra</button>
+    <button id="go-home">Volver al Home</button>
 
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
@@ -23,7 +24,7 @@
             const userSession = await sessionResponse.json();
 
             const userInfoElement = document.getElementById('user-info');
-            userInfoElement.textContent = `Usuario: ${userSession.email} | Carrito ID: ${userSession.cart_id._id}`;
+            userInfoElement.textContent = `Usuario: ${userSession.email} `;
 
             const response = await fetch(`/api/cart/${userSession.cart_id._id}`);
             const cart = await response.json();
@@ -60,6 +61,10 @@
             }
 
             document.getElementById('finalize-purchase').addEventListener('click', finalizePurchase);
+
+            document.getElementById('go-home').addEventListener('click', function () {
+                window.location.href = '/home';
+            });
         });
     </script>
 </body>
