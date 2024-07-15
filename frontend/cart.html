@@ -52,8 +52,10 @@
                     method: 'GET'
                 });
                 if (response.ok) {
+                    const data = await response.json();
+                    window.location.href = `/ticket?ticketId=${data.ticketId}`;
+                    history.pushState(null, '', ticketUrl);
                     alert('Compra finalizada correctamente');
-                    window.location.href = '/home';
                 } else {
                     const errorMessage = await response.text();
                     alert(`Error: ${errorMessage}`);

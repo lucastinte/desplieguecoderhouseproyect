@@ -42,4 +42,7 @@ indexRouter.get("/", (req, res) => {
 indexRouter.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/register.html"));
 });
+indexRouter.get("/ticket", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/ticket.html"));
+});
 export default indexRouter;

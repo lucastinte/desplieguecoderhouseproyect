@@ -7,5 +7,6 @@ cartRouter.post("/", cartController.createCart);
 cartRouter.get("/:cid", cartController.getCart);
 cartRouter.post("/:cid/:pid", cartController.insertProductCart);
 cartRouter.get("/purchase/:cid", cartController.createTicket);
+cartRouter.get("/ticket/:tid", cartController.getTicket);
 
 export default cartRouter;

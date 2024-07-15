@@ -1,5 +1,0 @@
-MONGO_BD_URL = url;
-SESSION_SECRET = pass;
-COOKIE_SECRET = pass;
-SALT = numero;
-JWT_SECRET = pass;

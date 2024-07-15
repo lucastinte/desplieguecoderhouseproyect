@@ -88,8 +88,7 @@ export const createTicket = async (req, res) => {
         }
 
         await cartModel.findByIdAndUpdate(cartId, { products: [] });
-
-        res.status(200).send(newTicket);
+        res.status(200).json({ ticketId: newTicket._id });
       } else {
         cart.products = cart.products.filter(
           (prod) => !prodSinStock.includes(prod.id_prod)
@@ -105,5 +104,22 @@ export const createTicket = async (req, res) => {
   } catch (error) {
     console.error("Error interno del servidor:", error);
     res.status(500).send(`Error interno del servidor: ${error.message}`);
+  }
+};
+
+export const getTicket = async (req, res) => {
+  try {
+    const ticketId = req.params.tid;
+    const ticket = await ticketModel
+      .findById(ticketId)
+      .populate("products.id_prod");
+    if (!ticket) {
+      return res.status(404).send("Ticket no encontrado");
+    }
+    res.status(200).send(ticket);
+  } catch (error) {
+    res
+      .status(500)
+      .send(`Error interno del servidor al consultar ticket: ${error}`);
   }
 };
